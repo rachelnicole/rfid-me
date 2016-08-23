@@ -12,19 +12,17 @@ void setup() {
   // allowed to read from the tags.
   Serial.begin(115200);
 
-  Serial.println("Looking for MFRC522.");
+  Serial.println("[\"init\"]");
   nfc.begin();
 
   // Get the firmware version of the RFID chip
   byte version = nfc.getFirmwareVersion();
   if (! version) {
-    Serial.print("Didn't find MFRC522 board.");
-    while(1); //halt
+    Serial.println("[\"error\"]");
+    while(1);
   }
 
-  Serial.print("Found MFRC522 0x");
-  Serial.print(version, HEX);
-  Serial.println(".");
+  Serial.println("[\"found\", " + String(version) + "]");
 }
 
 void loop() {
