@@ -5,11 +5,6 @@ var port = new SerialPort(portaddr, {
   parser: SerialPort.parsers.raw
 });
 var sys = require('util');
-var fs = require('fs');
-// Stores the RFID id as it reconstructs from the stream.
-var id = '';
-// List of all RFID ids read
-var ids = [];
 
 port.on('open', function() {
   console.log('Opened port');
