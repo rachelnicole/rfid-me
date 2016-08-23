@@ -27,9 +27,6 @@ void setup() {
   Serial.println(".");
 }
 
-byte keyA[6] = {0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, };
-byte keyB[6] = {0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, };
-
 void loop() {
   byte status;
   byte data[MAX_LEN];
@@ -44,9 +41,9 @@ void loop() {
     Serial.println("------------------------------");
     Serial.println("Tag detected.");
     Serial.print("Type: ");
-    Serial.print(data[0], HEX);
+    Serial.print(data[0]);
     Serial.print(", ");
-    Serial.println(data[1], HEX);
+    Serial.println(data[1]);
 
     // calculate the anti-collision value for the currently detected
     // tag and write the serial into the data array.
@@ -55,10 +52,10 @@ void loop() {
 
     Serial.println("The serial nb of the tag is:");
     for (i = 0; i < 3; i++) {
-      Serial.print(serial[i], HEX);
+      Serial.print(serial[i]);
       Serial.print(", ");
     }
-    Serial.println(serial[3], HEX);
+    Serial.println(serial[3]);
 
     // Select the tag that we want to talk to. If we don't do this the
     // chip does not know which tag it should talk if there should be
