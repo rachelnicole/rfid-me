@@ -22,8 +22,7 @@ void setup() {
     while(1); //halt
   }
 
-  Serial.print("Found chip MFRC522 ");
-  Serial.print("Firmware ver. 0x");
+  Serial.print("Found MFRC522 0x");
   Serial.print(version, HEX);
   Serial.println(".");
 }
@@ -42,6 +41,7 @@ void loop() {
   status = nfc.requestTag(MF1_REQIDL, data);
 
   if (status == MI_OK) {
+    Serial.println("------------------------------");
     Serial.println("Tag detected.");
     Serial.print("Type: ");
     Serial.print(data[0], HEX);
@@ -64,52 +64,6 @@ void loop() {
     // chip does not know which tag it should talk if there should be
     // any other tags in the area..
     nfc.selectTag(serial);
-
-    // Assuming that there are only 64 blocks of memory in this chip.
-    for (i = 0; i < 64; i++) {
-      // Try to authenticate each block first with the A key.
-      status = nfc.authenticate(MF1_AUTHENT1A, i, keyA, serial);
-      if (status == MI_OK) {
-        Serial.print("Authenticated block nb. 0x");
-        Serial.print(i, HEX);
-        Serial.println(" with key A.");
-        // Reading block i from the tag into data.
-        status = nfc.readFromTag(i, data);
-        if (status == MI_OK) {
-          // If there was no error when reading; print all the hex
-          // values in the data.
-          for (j = 0; j < 15; j++) {
-            Serial.print(data[j], HEX);
-            Serial.print(", ");
-          }
-          Serial.println(data[15], HEX);
-        } else {
-          Serial.println("Read failed.");
-        }
-      } else {
-        // If we could not authenticate with the A key, we will try
-        // the B key.
-        status = nfc.authenticate(MF1_AUTHENT1B, i, keyB, serial);
-        if (status == MI_OK) {
-          Serial.print("Authenticated block nb. 0x");
-          Serial.print(i, HEX);
-          Serial.println(" with key B.");
-          status = nfc.readFromTag(i, data);
-          if (status == MI_OK) {
-            for (j = 0; j < 15; j++) {
-              Serial.print(data[j], HEX);
-              Serial.print(", ");
-            }
-            Serial.println(data[15], HEX);
-          } else {
-            Serial.println("Read failed.");
-          }
-        } else {
-          Serial.print("Access denied at block nb. 0x");
-          Serial.println(i, HEX);
-        }
-      }
-    }
 
     // Stop the tag and get ready for reading a new tag.
     nfc.haltTag();
