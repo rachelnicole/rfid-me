@@ -29,7 +29,7 @@ void setup() {
 void loop() {
   byte status;
   byte data[MAX_LEN];
-  byte serial[16];
+  byte serial[5];
   int i, j, pos;
 
   // Send a general request out into the aether. If there is a tag in
@@ -37,19 +37,16 @@ void loop() {
   status = nfc.requestTag(MF1_REQIDL, data);
 
   if (status == MI_OK) {
-    Serial.println("[\"type\", " + String(data[0]) +  ", " + String(data[1]) + "]");
-
-    for (j = 0; j < 16; j++) {
-      data[j] = 127;
-    }
+    Serial.println("[\"type\", " + String(data[0]) +  ", " +
+        String(data[1]) + "]");
 
     // calculate the anti-collision value for the currently detected
     // tag and write the serial into the data array.
     status = nfc.antiCollision(data);
-    memcpy(serial, data, 16);
+    memcpy(serial, data, 5);
 
     Serial.print("[\"serial\", ");
-    for (i = 0; i < 16; i++) {
+    for (i = 0; i < 5; i++) {
       if (i > 0) {
         Serial.print(", ");
       }
