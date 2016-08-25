@@ -8,6 +8,7 @@ MFRC522 nfc(SAD, RST);
 
 void setup() {
   SPI.begin();
+  SPI.setClockDivider(SPI_CLOCK_DIV8);
   // Read a fast as possible. There is a limit for how long we are
   // allowed to read from the tags.
   Serial.begin(115200);
