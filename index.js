@@ -21,9 +21,6 @@ port.on('open', function() {
       case 'type':
         rfidType(data[2].toString(16) + data[1].toString(16));
         break;
-      case 'anticol':
-        rfidAntiCollision(data[1].toString(16));
-        break;
       case 'serial':
         rfidSerial(data[2].toString(16) + ':' + data[3].toString(16) + ':' + data[4].toString(16));
         break;
@@ -44,10 +41,6 @@ function rfidFound(version) {
 
 function rfidType(type) {
   console.log('tag type ' + type);
-}
-
-function rfidAntiCollision(status) {
-  console.log('anti collision ' + status);
 }
 
 function rfidSerial(serial) {
