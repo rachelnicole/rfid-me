@@ -4,7 +4,21 @@ var port = new SerialPort(portaddr, {
   baudRate: 115200,
   parser: SerialPort.parsers.readline('\n')
 });
-var sys = require('util');
+var http = require('http');
+var express = require('express');
+var app = module.exports.app = express();
+//Middleware
+var server = http.createServer(app);
+var io = require('socket.io').listen(server);  //pass a http.Server instance
+
+app.use('/public', express.static('public'));
+
+app.get('/', function (req, res) {
+  res.sendfile(__dirname + '/index.html');
+});
+
+var deniedText = "<p class=\"access denied\">access denied</p>";
+var grantedText = "<p class=\"access granted\">access granted</p>";
 
 port.on('open', function() {
   console.log('Opened port');
@@ -45,4 +59,14 @@ function rfidType(type) {
 
 function rfidSerial(serial) {
   console.log('serial ' + serial);
+  if (serial !== 'PUT_SERIAL_HERE') { 
+    console.log('access denied');
+    io.sockets.emit("access", deniedText);
+  }
+  else {
+    console.log('access granted');
+    io.sockets.emit("access", grantedText);
+  }
 }
+
+server.listen(3030);
