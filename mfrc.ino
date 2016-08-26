@@ -11,7 +11,7 @@ void setup() {
   SPI.setClockDivider(SPI_CLOCK_DIV8);
   // Read a fast as possible. There is a limit for how long we are
   // allowed to read from the tags.
-  Serial.begin(115200);
+  Serial.begin(9600);
 
   Serial.println("[\"init\"]");
   nfc.begin();

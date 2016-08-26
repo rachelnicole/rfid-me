@@ -1,7 +1,7 @@
 var SerialPort = require("serialport");
 var portaddr = "/dev/cu.usbmodem1421";
 var port = new SerialPort(portaddr, {
-  baudRate: 115200,
+  baudRate: 9600,
   parser: SerialPort.parsers.readline('\n')
 });
 var http = require('http');
