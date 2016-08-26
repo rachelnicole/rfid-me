@@ -59,7 +59,7 @@ function rfidType(type) {
 
 function rfidSerial(serial) {
   console.log('serial ' + serial);
-  if (serial !== 'PUT_SERIAL_HERE') { 
+  if (serial !== '4:38:2') { 
     console.log('access denied');
     io.sockets.emit("access", deniedText);
   }

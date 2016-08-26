@@ -1,0 +1,24 @@
+<html>
+  <head>
+    <title>ｗｅｌｃｏｍｅ 2 ｃｙｂｅｒｓｐａｃｅ</title>
+    <link rel="stylesheet" type="text/css" href="public/css/styles.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+  </head>
+  <body>
+    <div class="hack-type">
+      <div class="mainframe">
+      </div>
+      <div class="cli">
+        <p class="loading">Verifying Credentials</p>
+      </div>
+    </div>
+    <script src="http://localhost:3030/socket.io/socket.io.js"></script>
+    <script>
+      var socket = io.connect('http://localhost:3030/');
+      socket.on("access", function(accessText) {  
+        // todo: add the tweet as a DOM node
+        $('.cli').append(accessText)
+      });
+    </script>
+  </body>
+</html>
