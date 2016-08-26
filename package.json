@@ -1,0 +1,23 @@
+{
+  "name": "rfid-me",
+  "version": "1.0.0",
+  "description": "access denied or not",
+  "main": "index.js",
+  "dependencies": {
+    "serialport": "^4.0.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/rachelnicole/rfid-me.git"
+  },
+  "author": "Rachel White",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rachelnicole/rfid-me/issues"
+  },
+  "homepage": "https://github.com/rachelnicole/rfid-me#readme"
+}
